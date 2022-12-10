@@ -19,7 +19,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public String addContactDetails(Contact contact) {
 		Contact c = contactRepository.save(contact);
-		if (c != null) {
+		if (c.getContactId() != null) {
 			return "Contact Saved successfully";
 		} else {
 			return "Something went wrong";
@@ -59,7 +59,10 @@ public class ContactServiceImpl implements ContactService {
 	public Contact getContactById(Integer contactId) {
 
 		Optional<Contact> contact = contactRepository.findById(contactId);
-		return contact.get();
+		if (contact.isPresent()) {
+			return contact.get();
+		}
+		return null;
 	}
 
 }
