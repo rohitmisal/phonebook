@@ -10,9 +10,13 @@ import com.rohit.model.Contact;
 public interface ContactService {
 
 	public String addContactDetails(Contact contact);
+
 	public List<Contact> getAllContacts();
+
 	public Contact getContactById(Integer contactId);
+
 	public String updateContactDetails(Contact contact);
+
 	public String deleteContact(Integer contactId);
-	
+
 }
