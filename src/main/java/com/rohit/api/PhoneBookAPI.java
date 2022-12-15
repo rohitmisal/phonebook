@@ -18,13 +18,13 @@ import com.rohit.service.ContactService;
 @RestController
 @CrossOrigin
 public class PhoneBookAPI {
-
+	
 	@Autowired
 	ContactService contactService;
 
 	//POST => http://localhost:8080/contact
 	@PostMapping("/contact")
-	public String addContactDetaisl(@RequestBody  Contact contact) {
+	public String addContactDetails(@RequestBody  Contact contact) {
 		String msg = contactService.addContactDetails(contact);
 		return msg;
 	}
@@ -37,7 +37,7 @@ public class PhoneBookAPI {
 	}
 
 	//PUT => http://localhost:8080/contact/
-	@PutMapping("/contact/")
+	@PutMapping("/contact")
 	public String updateContactDetils(@RequestBody Contact contact) {
 		String msg = contactService.updateContactDetails(contact);
 		return msg;
@@ -45,7 +45,7 @@ public class PhoneBookAPI {
 
 	//DELETE => http://localhost:8080/contact/101
 	@DeleteMapping("/contact/{contactId}")
-	public String deleteContace(@PathVariable Integer contactId) {
+	public String deleteContact(@PathVariable Integer contactId) {
 		String msg = contactService.deleteContact(contactId);
 		return msg;
 
