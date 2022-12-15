@@ -3,6 +3,7 @@ package com.rohit.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.rohit.model.Contact;
 import com.rohit.service.ContactService;
 
 @RestController
+@CrossOrigin
 public class PhoneBookAPI {
 
 	@Autowired
@@ -43,7 +45,7 @@ public class PhoneBookAPI {
 
 	//DELETE => http://localhost:8080/contact/101
 	@DeleteMapping("/contact/{contactId}")
-	public String deleteContace(Integer contactId) {
+	public String deleteContace(@PathVariable Integer contactId) {
 		String msg = contactService.deleteContact(contactId);
 		return msg;
 
