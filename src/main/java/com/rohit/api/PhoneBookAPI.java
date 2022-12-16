@@ -15,35 +15,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rohit.model.Contact;
 import com.rohit.service.ContactService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @CrossOrigin
+@Api("This is contact API")
 public class PhoneBookAPI {
-	
+
 	@Autowired
 	ContactService contactService;
 
-	//POST => http://localhost:8080/contact
+	@ApiOperation("THis is used to Add contact")
 	@PostMapping("/contact")
-	public String addContactDetails(@RequestBody  Contact contact) {
+	public String addContactDetails(@RequestBody Contact contact) {
+		contact.setIsActive("Y");
 		String msg = contactService.addContactDetails(contact);
 		return msg;
 	}
 
-	//GET => http://localhost:8080/contacts
+	@ApiOperation("THis is used to get all contacts")
 	@GetMapping("/contacts")
 	public List<Contact> getAllContactDetails() {
 		List<Contact> listContacts = contactService.getAllContacts();
 		return listContacts;
 	}
 
-	//PUT => http://localhost:8080/contact/
+	@ApiOperation("THis is used to update contact")
 	@PutMapping("/contact")
 	public String updateContactDetils(@RequestBody Contact contact) {
 		String msg = contactService.updateContactDetails(contact);
 		return msg;
 	}
 
-	//DELETE => http://localhost:8080/contact/101
+	@ApiOperation("THis is used to delte  contact by Id")
 	@DeleteMapping("/contact/{contactId}")
 	public String deleteContact(@PathVariable Integer contactId) {
 		String msg = contactService.deleteContact(contactId);
@@ -51,7 +56,7 @@ public class PhoneBookAPI {
 
 	}
 
-	//GET => http://localhost:8080/contact/101
+	@ApiOperation("THis is used to get contact by ID")
 	@GetMapping("/contact/{contactId}")
 	public Contact getContactById(@PathVariable Integer contactId) {
 		Contact contact = contactService.getContactById(contactId);

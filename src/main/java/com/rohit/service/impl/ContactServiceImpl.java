@@ -29,7 +29,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public List<Contact> getAllContacts() {
 
-		return contactRepository.findAll();
+		return contactRepository.findByisActive("Y");
 	}
 
 	@Override
@@ -47,12 +47,25 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public String deleteContact(Integer contactId) {
 
-		if (contactRepository.existsById(contactId)) {
-			contactRepository.deleteById(contactId);
-			return "contact deleted Succcessfully";
-		} else {
-			return "contact with given id does not exist";
-		}
+		Optional<Contact> contact = contactRepository.findById(contactId);
+		
+			if(contactRepository.existsById(contactId)){
+			Contact c= contact.get();
+				c.setIsActive("N");
+				contactRepository.save(c);
+				return "contact deleted Succcessfully";
+
+			}else {
+				return "contact with given id does not exist";
+			}
+		
+			/*
+			 * if (contactRepository.existsById(contactId)) {
+			 * 
+			 * contactRepository.deleteById(contactId); return
+			 * "contact deleted Succcessfully"; } else { return
+			 * "contact with given id does not exist"; }
+			 */
 	}
 
 	@Override
